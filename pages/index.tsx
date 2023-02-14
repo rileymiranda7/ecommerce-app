@@ -4,7 +4,7 @@ import { GetServerSideProps } from 'next'
 import { client } from '../lib/client'
 import { Product, FooterBanner, HeroBanner } from '../components'
 
-type HomeProps = {
+interface HomeProps {
   products: any,
   bannerData: any
 }
