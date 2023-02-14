@@ -3,16 +3,19 @@ import { GetServerSideProps } from 'next'
 
 import { client } from '../lib/client'
 import { Product, FooterBanner, HeroBanner } from '../components'
+import type { sanityBanner, sanityProduct } from '@/types/interfaces'
 
 interface HomeProps {
-  products: any,
-  bannerData: any
+  products: sanityProduct[],
+  bannerData: sanityBanner[]
 }
 
 export const Home = ({ products, bannerData }: HomeProps) => {
   return (
   <>
-    <HeroBanner heroBanner={} />
+    <HeroBanner heroBanner={bannerData[0]} />
+
+    {console.log(products)}
     
     <div className="products-heading">
       <h2>Best Selling Products</h2>
@@ -20,20 +23,20 @@ export const Home = ({ products, bannerData }: HomeProps) => {
     </div>
 
     <div className="products-container">
-      {products?.map((product: any) => product.name)}
+      {products?.map((product: sanityProduct) => <Product key={product._id} product={product} />)}
     </div>
 
-    <FooterBanner />
+    <FooterBanner footerBanner={bannerData[0]}/>
   </>
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const query = '*[_type == "product"]';
-  const products = await client.fetch(query);
+  const productQuery = '*[_type == "product"]';
+  const products: sanityProduct[] = await client.fetch(productQuery);
 
   const bannerQuery = '*[_type == "banner"]';
-  const bannerData = await client.fetch(bannerQuery);
+  const bannerData: sanityBanner[] = await client.fetch(bannerQuery);
 
   return {
     props: { products, bannerData }
