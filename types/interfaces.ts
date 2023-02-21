@@ -33,6 +33,19 @@ interface sanityProduct {
   _type: string;
   _updatedAt: string;
 }
+interface contextProduct {
+  details: string;
+  image: any;
+  name: string;
+  price: number;
+  slug: slug;
+  _createdAt: string;
+  _id: string;
+  _rev: string;
+  _type: string;
+  _updatedAt: string;
+  quantity: number;
+}
 
 
-export type { sanityBanner, sanityProduct };
+export type { sanityBanner, sanityProduct, contextProduct };

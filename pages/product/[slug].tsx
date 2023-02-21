@@ -57,13 +57,19 @@ export const ProductDetails = ({ product, products }: ProductDetailsProps) => {
           <div className='quantity'>
             <h3>Quantity:</h3>
             <p className='quantity-desc'>
-              <span className='minus'>
+              <span 
+                className='minus'
+                onClick={decQty}
+              >
                 <AiOutlineMinus />
               </span>
               <span className='num'>
-                0
+                {qty}
               </span>
-              <span className='plus'>
+              <span 
+                className='plus'
+                onClick={incQty}
+              >
                 <AiOutlinePlus />
               </span>
             </p>
