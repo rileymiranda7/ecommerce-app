@@ -2,7 +2,6 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    console.log(req.body)
     try {
       // Create Checkout Sessions from body params.
       const params = {
@@ -18,7 +17,6 @@ export default async function handler(req, res) {
           const img = item.image[0].asset._ref;
           const newImage = img.replace('image-', 'https://cdn.sanity.io/images/e1qx0pla/production/')
           .replace('-webp', '.webp');
-          console.log('IMAGE', newImage);
 
           return {
             price_data: {
@@ -36,8 +34,8 @@ export default async function handler(req, res) {
             quantity: item.quantity
           }
         }),
-        success_url: `${req.headers.origin}/?success=true`,
-        cancel_url: `${req.headers.origin}/?canceled=true`,
+        success_url: `${req.headers.origin}/success`,
+        cancel_url: `${req.headers.origin}/canceled`,
       }
       const session = await stripe.checkout.sessions.create(params);
       

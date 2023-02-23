@@ -15,7 +15,13 @@ interface ProductDetailsProps {
 export const ProductDetails = ({ product, products }: ProductDetailsProps) => {
   const { image, name, details, price } = product;
   const [index, setIndex] = useState(0);
-  const { decQty, incQty, qty, onAdd } = useContext(Context);
+  const { setShowCart, decQty, incQty, qty, onAdd } = useContext(Context);
+
+  const handleBuyNow = () => {
+    onAdd(product, qty);
+
+    setShowCart(true);
+  }
 
   return (
     <div>
@@ -82,7 +88,13 @@ export const ProductDetails = ({ product, products }: ProductDetailsProps) => {
             >
               Add to Cart
             </button>
-            <button type='button' className='buy-now'>Buy Now</button>
+            <button 
+              type='button' 
+              className='buy-now'
+              onClick={handleBuyNow}
+              >
+                Buy Now
+              </button>
           </div>
         </div>
       </div>

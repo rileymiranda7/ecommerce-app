@@ -12,11 +12,11 @@ export interface AppContext {
   showCart: boolean
   //setShowCart: React.Dispatch<React.SetStateAction<boolean>>
   cartItems: contextProduct[]
-  //setCartItems: React.Dispatch<React.SetStateAction<string[] | undefined>>
+  setCartItems: React.Dispatch<React.SetStateAction<contextProduct[]>>
   totalPrice: number
-  //setTotalPrice: React.Dispatch<React.SetStateAction<number | undefined>>
+  setTotalPrice: React.Dispatch<React.SetStateAction<number>>
   totalQuantities: number
-  //setTotalQuantities: React.Dispatch<React.SetStateAction<number[] | undefined>>
+  setTotalQuantities: React.Dispatch<React.SetStateAction<number>>
   qty: number
   //setQty: React.Dispatch<React.SetStateAction<number | undefined>>
   incQty: () => void;
@@ -38,7 +38,10 @@ export const Context = createContext<AppContext>({
   onAdd: () => {},
   setShowCart: () => {},
   toggleCartItemQuantity: () => {},
-  onRemove: () => {}
+  onRemove: () => {},
+  setCartItems: () => {},
+  setTotalPrice: () => {},
+  setTotalQuantities: () => {}
 });
 
 
@@ -134,7 +137,10 @@ export const StateContextProvider = ({ children }: StateContextPropsProvider) =>
         onAdd,
         setShowCart,
         toggleCartItemQuantity,
-        onRemove
+        onRemove,
+        setCartItems,
+        setTotalPrice,
+        setTotalQuantities
       }}
     >
       {children}
