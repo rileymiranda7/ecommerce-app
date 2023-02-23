@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { client, urlFor } from '../../lib/client'
 import { GetStaticProps, GetStaticPaths } from 'next'
 import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar } from 'react-icons/ai'
 
 import type { sanityProduct } from '@/types/interfaces';
 import { Product } from "../../components"
-import { useStateContext } from '../../context/StateContext'
+import { Context } from '../../context/StateContext'
 
 interface ProductDetailsProps {
   product: sanityProduct
@@ -15,7 +15,7 @@ interface ProductDetailsProps {
 export const ProductDetails = ({ product, products }: ProductDetailsProps) => {
   const { image, name, details, price } = product;
   const [index, setIndex] = useState(0);
-  const { decQty, incQty, qty } = useStateContext();
+  const { decQty, incQty, qty, onAdd } = useContext(Context);
 
   return (
     <div>
@@ -75,7 +75,13 @@ export const ProductDetails = ({ product, products }: ProductDetailsProps) => {
             </p>
           </div>
           <div className='buttons'>
-            <button type='button' className='add-to-cart'>Add to Cart</button>
+            <button 
+              type='button' 
+              className='add-to-cart'
+              onClick={() => onAdd(product, qty)}
+            >
+              Add to Cart
+            </button>
             <button type='button' className='buy-now'>Buy Now</button>
           </div>
         </div>

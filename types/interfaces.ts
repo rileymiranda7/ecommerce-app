@@ -47,5 +47,6 @@ interface contextProduct {
   quantity: number;
 }
 
+type toggleCartItemQuantityAction = "DECREMENT" | "INCREMENT";
 
-export type { sanityBanner, sanityProduct, contextProduct };
+export type { sanityBanner, sanityProduct, contextProduct, toggleCartItemQuantityAction };

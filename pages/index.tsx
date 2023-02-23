@@ -14,8 +14,6 @@ export const Home = ({ products, bannerData }: HomeProps) => {
   return (
   <>
     <HeroBanner heroBanner={bannerData[0]} />
-
-    {console.log(products)}
     
     <div className="products-heading">
       <h2>Best Selling Products</h2>
